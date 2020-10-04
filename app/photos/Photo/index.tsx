@@ -6,10 +6,12 @@ import {APIPhoto} from '../../modules/Photos';
 interface Props {
   memberId: string;
   photo: APIPhoto;
+  photoDeleteHandler: Function;
 }
 
-const Photo: React.FC<Props> = ({photo}) => {
-  console.log(photo.url);
+const Photo: React.FC<Props> = ({photo, photoDeleteHandler}) => {
+  const deleteHandler = () => photoDeleteHandler(photo.id);
+
   return (
     <View style={styles.container}>
       <Image
@@ -17,7 +19,7 @@ const Photo: React.FC<Props> = ({photo}) => {
         source={{uri: photo.url}}
         resizeMode={'cover'}
       />
-      <TouchableHighlight style={styles.delete}>
+      <TouchableHighlight style={styles.delete} onPress={deleteHandler}>
         <Text accessibilityRole="button" accessibilityLabel="Delete">❌</Text>
       </TouchableHighlight>
     </View>

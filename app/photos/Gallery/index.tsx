@@ -8,6 +8,7 @@ import Photo from '../Photo';
 interface Props {
   memberId: string;
   photos: APIPhoto[];
+  photoDeleteHandler: Function;
 };
 
 interface DragableItem {
@@ -15,10 +16,15 @@ interface DragableItem {
   data: APIPhoto;
 }
 
-const Gallery: React.FC<Props> = ({photos, memberId}) => {
+const Gallery: React.FC<Props> = ({photos, memberId, photoDeleteHandler}) => {
   // Return a single photo component for the draggable grid
   const renderPhoto = ({data}: DragableItem) => (
-    <Photo key={data.id} photo={data} memberId={memberId} />
+    <Photo
+      key={data.id}
+      photo={data}
+      memberId={memberId}
+      photoDeleteHandler={photoDeleteHandler}
+    />
   );
 
   // Create draggable grid item data
